@@ -55,7 +55,7 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
 };
 
 document.addEventListener("keydown", function (event) {
- 
+
 
   switch (event.key) {
     case "w":
