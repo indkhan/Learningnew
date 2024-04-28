@@ -48,12 +48,13 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
       default: console.log(buttonInnerHTML);
 
     };
+    buttonAnimation(buttonInnerHTML);
 
   }
   )
 };
 
-document.addEventListener("keypress", function (event) {
+document.addEventListener("keydown", function (event) {
  
 
   switch (event.key) {
@@ -96,5 +97,19 @@ document.addEventListener("keypress", function (event) {
       
       
     default: console.log(buttonInnerHTML);
-  }
+  };
+  buttonAnimation(event.key);
 });
+
+
+function buttonAnimation(currentKey) {
+
+  var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed");
+
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
+
+}
