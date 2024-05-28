@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Anime Quotes</title>
+  </head>
+  <body>
+    <h1>Get an Anime Quote Based on Your Feeling</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="feeling">Enter your feeling:</label>
+      <input type="text" id="feeling" name="feeling" />
+      <button type="submit">Get Quote</button>
+    </form>
+    {% if quote %}
+    <h2>Quote:</h2>
+    <p>{{ quote }}</p>
+    {% endif %}
+  </body>
+</html>
