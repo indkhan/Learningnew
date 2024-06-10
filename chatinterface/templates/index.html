@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat with AI</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .chat-button {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .chat-window {
+        position: fixed;
+        bottom: 80px;
+        left: 20px;
+        width: 300px;
+        height: 400px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+      .chat-header {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+      .chat-body {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        background-color: #f9f9f9;
+      }
+      .chat-message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 8px;
+      }
+      .chat-message.user {
+        background-color: #e9f7ff;
+        text-align: right;
+      }
+      .chat-message.ai {
+        background-color: #f1f1f1;
+      }
+      .chat-message.ai strong {
+        color: #007bff;
+      }
+      .chat-input {
+        display: flex;
+        border-top: 1px solid #ccc;
+        background-color: #fff;
+      }
+      .chat-input input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-right: 1px solid #ccc;
+        outline: none;
+      }
+      .chat-input button {
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="chat-button" onclick="toggleChat()">💬</button>
+    <div class="chat-window" id="chat-window">
+      <div class="chat-header">Chat with AI</div>
+      <div class="chat-body" id="chat-body">
+        <!-- Chat messages will appear here -->
+      </div>
+      <div class="chat-input">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Type a message..."
+          onkeypress="handleKeyPress(event)"
+        />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <script>
+      function toggleChat() {
+        const chatWindow = document.getElementById("chat-window");
+        chatWindow.style.display =
+          chatWindow.style.display === "none" ? "flex" : "none";
+      }
+
+      function handleKeyPress(event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      }
+
+      async function sendMessage() {
+        const input = document.getElementById("chat-input");
+        const message = input.value.trim();
+        if (message === "") return;
+
+        const chatBody = document.getElementById("chat-body");
+        const userMessage = document.createElement("div");
+        userMessage.className = "chat-message user";
+        userMessage.textContent = message;
+        chatBody.appendChild(userMessage);
+
+        const response = await fetch("/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message }),
+        });
+        const data = await response.json();
+
+        const aiMessage = document.createElement("div");
+        aiMessage.className = "chat-message ai";
+        aiMessage.innerHTML = data.response.replace(
+          /\*\*(.*?)\*\*/g,
+          "<strong>$1</strong>"
+        );
+        chatBody.appendChild(aiMessage);
+
+        input.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+    </script>
+  </body>
+</html>
