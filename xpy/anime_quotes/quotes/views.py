@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.conf import settings
 
 client = Groq(
-    api_key='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',
+    api_key='',
 )
 # Ensure you have your OpenAI API key in your environment variables
 
