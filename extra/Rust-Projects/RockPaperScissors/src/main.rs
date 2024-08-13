@@ -31,12 +31,12 @@ fn main() {
 
         match (user_input.as_str(), computer_choice) {
             ("rock", "scissors") | ("paper", "rock") | ("scissors", "paper") => {
-                println!("You win!")
+                println!("Suiiiiiii You win!")
             }
             ("rock", "rock") | ("paper", "paper") | ("scissors", "scissors") => {
                 println!("It's a tie!")
             }
-            _ => println!("Computer wins!"),
+            _ => println!("so at last the Computer wins!"),
         }
     }
 }

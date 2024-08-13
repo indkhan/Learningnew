@@ -20,6 +20,8 @@ public class Arrays {
             if(numbers[i] == y) {
 
                 System.out.println("found at index : "+i);
+                System.out.println("Good new hope you like it ");
+
                 
             }}
 
@@ -28,6 +30,6 @@ public class Arrays {
         for(int i=0; i<size; i++) {
             System.out.println(numbers[i]);
         }
-        System.out.println("the length is : "+numbers.length);
+        System.out.println("the length of this array is of size : "+numbers.length);
     }
 }

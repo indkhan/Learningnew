@@ -13,8 +13,12 @@ public class Recursiveb {
 
     public static void main(String[] args) {
         // Example usage
+
         int number = 5;
+        int numberbig = 1000;
         long result = factorial(number);
+        long resultbig = factorial(numberbig);
         System.out.println("Factorial of " + number + " is: " + result);
+        System.out.println("Factorial of " + numberbig + " is: " + resultbig);
     }
 }

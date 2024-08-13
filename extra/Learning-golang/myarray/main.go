@@ -15,4 +15,5 @@ func main() {
 	var veglist = [3]string{"Potato hi there", "Beans", "Okra"}
 
 	fmt.Println("veggy list is ", veglist)
+  fmt.Println("Hope you liked this program")
 }
