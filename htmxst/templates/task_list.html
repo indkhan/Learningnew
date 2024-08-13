@@ -1,0 +1,11 @@
+<ul>
+    {% for task in tasks %}
+    <li style="text-decoration: {{ 'line-through' if task['completed'] else 'none' }};">
+        {{ task['name'] }}
+        <button hx-delete="{{ url_for('delete_task', task_id=task['id']) }}" hx-target="#task-list" hx-swap="outerHTML">Delete</button>
+        {% if not task['completed'] %}
+        <button hx-post="{{ url_for('complete_task', task_id=task['id']) }}" hx-target="#task-list" hx-swap="outerHTML">Complete</button>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
