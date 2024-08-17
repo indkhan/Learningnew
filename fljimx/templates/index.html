@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htmx with Flask</title>
+    <script src="https://unpkg.com/htmx.org@1.8.5"></script>
+</head>
+<body>
+    <h1>htmx with Flask</h1>
+
+    <form hx-post="/update" hx-trigger="click" hx-target="#response">
+        <input type="text" name="data" placeholder="Enter some data">
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="response"></div>
+</body>
+</html>
